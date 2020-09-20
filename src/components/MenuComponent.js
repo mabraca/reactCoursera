@@ -6,8 +6,6 @@ class Menu extends Component {
         this.state = {
             selectedDish: null
         };
-
-        this.onDishSelect = this.onDishSelect.bind(this);
         
     }
 
