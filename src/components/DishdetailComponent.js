@@ -28,15 +28,13 @@ class DishDetail  extends Component {
 
     renderComments(comments) {
         return(
-            <div key={comments.id} >
-                <Media tag="li" >
-                    <Media body left >
-                        <p>{comments.comment}</p>
-                        <p>-- {comments.author}</p>
-                    </Media>
-                        
+            <Media tag="li" key={comments.id}>
+                <Media body >
+                    <p>{comments.comment}</p>
+                    <p>-- {comments.author}, {comments.date} </p>
                 </Media>
-            </div>
+                    
+            </Media>
         );
     }
 
@@ -51,10 +49,10 @@ class DishDetail  extends Component {
             return(
                 <div className="row">
                     <div className="col-12 col-md-5 m-1">
-                        {this.renderDish(this.props.dish)}
+                        { this.renderDish(this.props.dish) }
                     </div>
                     <div className="col-12 col-md-5 m-1">
-                        <Media list>
+                        <Media list list-unstyled="true">
                             <h4>Comments</h4>
                             { commentarios }
                         </Media>
