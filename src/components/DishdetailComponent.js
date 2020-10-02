@@ -31,7 +31,7 @@ class DishDetail  extends Component {
             <Media tag="li" key={comments.id}>
                 <Media body >
                     <p>{comments.comment}</p>
-                    <p>-- {comments.author}, {comments.date} </p>
+                    <p>-- {comments.author}, {new Intl.DateTimeFormat('en-US',{year:'numeric', month:'short',day:'2-digit' }).format(new Date(Date.parse(comments.date)))} </p>
                 </Media>
                     
             </Media>
@@ -47,15 +47,17 @@ class DishDetail  extends Component {
             });
 
             return(
-                <div className="row">
-                    <div className="col-12 col-md-5 m-1">
-                        { this.renderDish(this.props.dish) }
-                    </div>
-                    <div className="col-12 col-md-5 m-1">
-                        <Media list list-unstyled="true">
-                            <h4>Comments</h4>
-                            { commentarios }
-                        </Media>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-12 col-md-5 m-1">
+                            { this.renderDish(this.props.dish) }
+                        </div>
+                        <div className="col-12 col-md-5 m-1">
+                            <Media list className="list-unstyled">
+                                <h4>Comments</h4>
+                                { commentarios }
+                            </Media>
+                        </div>
                     </div>
                 </div>
             );
