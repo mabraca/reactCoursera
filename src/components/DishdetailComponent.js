@@ -1,6 +1,6 @@
 import React from 'react';
-import { Media,Card, CardImg, CardBody, CardText,CardTitle } from 'reactstrap';
-
+import { Media,Card, CardImg, CardBody, CardText,CardTitle,Breadcrumb,BreadcrumbItem } from 'reactstrap';
+import {Link} from 'react-router-dom';
 
 
     // componentDidMount(){
@@ -41,16 +41,27 @@ import { Media,Card, CardImg, CardBody, CardText,CardTitle } from 'reactstrap';
     }
 
     const DishDetail = (props) => {
-        if (props.dish != null){
-            const commentarios = props.dish.comments.map((comment) => { 
-                return (
-                    // this.renderComments(comment)
-                    <RenderComments comments = {comment} />
-                );
-            });
 
+        const commentarios = props.comments.map((comment) => { 
+            return (
+                // this.renderComments(comment)
+                <RenderComments comments = {comment} />
+            );
+        });
+        if (props.dish != null ){
             return(
+            
                 <div className="container">
+                    <div className="row">
+                        <Breadcrumb>
+                            <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
+                            <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+                        </Breadcrumb>
+                        <div className="col-12">
+                            <h3>{props.dish.name}</h3>
+                            <hr></hr>
+                        </div>
+                    </div>
                     <div className="row">
                         <div className="col-12 col-md-5 m-1">
                             <RenderDish dish={props.dish} />
@@ -64,11 +75,8 @@ import { Media,Card, CardImg, CardBody, CardText,CardTitle } from 'reactstrap';
                     </div>
                 </div>
             );
-        }else{
-            return(
-                <div></div>
-            );
         }
+
     }
 
 
