@@ -5,6 +5,7 @@ import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import HomeComponent from './HomeComponent';
 import ContactComponent from './ContactComponent'
+import About from './AboutComponent'
 import { Switch, Route,Redirect} from 'react-router-dom';
 import { DISHES } from '../shared/dishes';
 import { COMMENTS } from '../shared/comments';
@@ -47,9 +48,8 @@ render() {
           <Route path="/home" component={ HomePage } />
           <Route exact path="/menu" component={() => <Menu dishes={this.state.dishes}/> }/>
           <Route path='/menu/:dishId' component={DishWithId} />
-
           <Route exact path="/contactus" component={ContactComponent}/>
-
+          <Route path="/aboutus" component={()=> <About leaders={this.state.leaders}/>}/>
           <Redirect to="/home"/>
         </Switch>
         <Footer />
