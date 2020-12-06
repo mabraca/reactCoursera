@@ -22,28 +22,53 @@ function RenderDish({dish}) {
             );
     }
 
-    function RenderComments({comments}) {
-        return(
-            <Media tag="li" key={comments.id}>
-                <Media body >
-                    <p>{comments.comment}</p>
-                    <p>-- {comments.author}, {new Intl.DateTimeFormat('en-US',{year:'numeric', month:'short',day:'2-digit' }).format(new Date(Date.parse(comments.date)))} </p>
-                </Media>
+    // function RenderComments({comments}) {
+    //     return(
+    //         <Media tag="li" key={comments.id}>
+    //             <Media body >
+    //                 <p>{comments.comment}</p>
+    //                 <p>-- {comments.author}, {new Intl.DateTimeFormat('en-US',{year:'numeric', month:'short',day:'2-digit' }).format(new Date(Date.parse(comments.date)))} </p>
+    //             </Media>
                 
-            </Media>
+    //         </Media>
             
+    //     );
+    // }
+
+
+    function RenderComments( {comments , dishId, addComment}) {
+        if (comments === null) {
+            return <div></div>;
+        }
+    
+        const comment = comments.map((comment) => {
+            return (
+                <div>
+                    <p>{comment.comment}</p>
+                    <p>-- {comment.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit' }).format(new Date(Date.parse(comment.date)))}</p>
+                </div>
+            );
+        })
+        return (
+            <div>
+                <h4>Comments</h4>
+                {comment}
+                <CommentForm dishId={dishId} addComment={addComment}/>
+            </div>
         );
+    
     }
+      
 
     const DishDetail = (props) => {
 
-        const commentarios = props.comments.map((comment) => { 
-            return (
-                <div className="row">
-                    <RenderComments comments = {comment} />
-                </div>
-            );
-        });
+        // const commentarios = props.comments.map((comment) => { 
+        //     return (
+        //         <div className="row">
+        //             <RenderComments comments = {comment} />
+        //         </div>
+        //     );
+        // });
         if (props.dish != null ){
             return(
             
@@ -63,11 +88,11 @@ function RenderDish({dish}) {
                             <RenderDish dish={props.dish} />
                         </div>
                         <div className="col-12 col-md-5 m-1">
-                            <h4>Comments</h4>
-                            <Media list className="list-unstyled">
+                            <RenderComments comments={props.comments} dishId={props.dish.id} addComment={props.addComment} />
+                            {/* <Media list className="list-unstyled">
                                 { commentarios }
                             </Media>
-                            <CommentForm />
+                            <CommentForm dishId={props.dishId} addComment={props.addComment}/> */}
                         </div>
                     </div>
                 </div>
@@ -100,8 +125,7 @@ function RenderDish({dish}) {
     
         handleSubmit(values) {
             this.toggleModal();
-            console.log('Current State is: ' + JSON.stringify(values));
-            alert('Current State is: ' + JSON.stringify(values));
+            this.props.addComment(this.props.dishId, values.rating, values.name, values.message);
         }
     
         render() {
