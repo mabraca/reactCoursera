@@ -3,6 +3,7 @@ import { Media,Card, CardImg, CardBody, CardText,CardTitle,Breadcrumb,Breadcrumb
     Button, Modal, ModalHeader,ModalBody,Label, Row, Col } from 'reactstrap';
 import {Link} from 'react-router-dom';
 import { Control,LocalForm, Errors } from 'react-redux-form';
+import { Loading } from './LoadingComponent';
     
 
 function RenderDish({dish}) {
@@ -21,19 +22,6 @@ function RenderDish({dish}) {
                 <div></div>
             );
     }
-
-    // function RenderComments({comments}) {
-    //     return(
-    //         <Media tag="li" key={comments.id}>
-    //             <Media body >
-    //                 <p>{comments.comment}</p>
-    //                 <p>-- {comments.author}, {new Intl.DateTimeFormat('en-US',{year:'numeric', month:'short',day:'2-digit' }).format(new Date(Date.parse(comments.date)))} </p>
-    //             </Media>
-                
-    //         </Media>
-            
-    //     );
-    // }
 
 
     function RenderComments( {comments , dishId, addComment}) {
@@ -61,15 +49,23 @@ function RenderDish({dish}) {
       
 
     const DishDetail = (props) => {
-
-        // const commentarios = props.comments.map((comment) => { 
-        //     return (
-        //         <div className="row">
-        //             <RenderComments comments = {comment} />
-        //         </div>
-        //     );
-        // });
-        if (props.dish != null ){
+        if( props.isLoading){
+            return (
+                <div className="container">
+                    <div className="row">
+                        <Loading />
+                    </div>
+                </div>
+            );
+        } else if (props.errMess){
+            return (
+                <div className="container">
+                    <div className="row">
+                        <h4>{props.errMess}</h4>
+                    </div>
+                </div>
+            );
+        } else if (props.dish != null ){
             return(
             
                 <div className="container">
