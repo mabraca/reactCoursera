@@ -1,4 +1,3 @@
-import { act } from 'react-dom/test-utils';
 import * as ActionTypes from './ActionTypes';
 
 export const Dishes = (state = {
