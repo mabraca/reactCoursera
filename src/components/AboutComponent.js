@@ -25,6 +25,7 @@ function RenderLeader(leader){
 
 
 function About(props) {
+    
     if( props.leaders.isLoading){
         return (
             <div className="container">

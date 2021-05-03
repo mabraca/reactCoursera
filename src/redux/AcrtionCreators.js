@@ -218,6 +218,7 @@ export const postFeedback = (feedback) => (dispatch) => {
         },
         credentials: 'same-origin'
     }).then(response => {
+        
         if(response.ok){
             return response;
         }else{
