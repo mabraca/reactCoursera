@@ -36,7 +36,6 @@ const mapDispatchToProps = dispatch => ({
 
 class Main extends Component{
  
-
 componentDidMount() {
   this.props.fetchDishes();
   this.props.fetchComments();

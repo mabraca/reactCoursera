@@ -8,6 +8,7 @@ import { baseUrl } from '../shared/baseUrl';
 import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 function RenderDish({dish}) {
+    
         if (dish != null)
             return(
                 <FadeTransform in 
