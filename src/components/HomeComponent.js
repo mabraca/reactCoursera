@@ -34,6 +34,8 @@ function RenderCard({item, isLoading, errMess}) {
 }
 
 function Home(props) {
+    console.log("Leader");
+    console.log(props);
     return(
         <div className="container">
             <div className="row align-items-start">
@@ -48,7 +50,9 @@ function Home(props) {
                     errMess={props.promosErrMess} />
                 </div>
                 <div className="col-12 col-md m-1">
-                    <RenderCard item={props.leader} />
+                    <RenderCard item={props.leader} 
+                    isLoading={props.leadersLoading}
+                    errMess={props.leadersErrMess}/>
                 </div>
             </div>
         </div>
