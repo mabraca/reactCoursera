@@ -7,6 +7,7 @@ import { NavLink } from 'react-router-dom';
 class Header extends Component {
     constructor(props){
         super(props);
+
         this.state = {
             isNavOpen : false,
             isModalOpen: false
@@ -31,7 +32,16 @@ class Header extends Component {
 
     handleLogin(event){
         this.toggleModal();
-        alert("Username: "+ this.username.value + " Password: " + this.password.value + " Remember Me:  "+ this.remember.checked);
+        
+        this.props.fetchLogin( this.username.value, this.password.value)
+        .then(response => { 
+            // var object = response.json();
+            console.log(response)
+            if(response.username) alert("User Info. Username: "+ response.username + " ID: " + response.id);
+        })
+        .catch(error =>{ 
+            console.log(error);
+        })
         event.preventDefault();
     }
     render (){
@@ -99,7 +109,7 @@ class Header extends Component {
                                 <Input type="text" id="username" name="username" innerRef={(input) => this.username = input} />
                             </FormGroup>
                             <FormGroup>
-                                <Label htmlFor="password">Username</Label>
+                                <Label htmlFor="password">Password</Label>
                                 <Input type="password" id="password" name="password" innerRef={(input) => this.password = input} />
                             </FormGroup>
                             <FormGroup check>

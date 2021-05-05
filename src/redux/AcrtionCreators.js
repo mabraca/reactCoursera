@@ -235,3 +235,38 @@ export const postFeedback = (feedback) => (dispatch) => {
     .then(response => response.json())
     .catch(error => dispatch(console.log("Post comments ", error.message)));
 }
+
+
+// Users
+
+
+export const fetchLogin = (username,password) => (dispatch) => {
+
+    return fetch(baseUrl + 'users')
+        .then(response => {
+            if(response.ok){
+                return response;
+            }else{
+                var error = new Error('Error ' + response.status + ': '+ response.statusText);
+                error.response  = response;
+                throw error;
+            }
+        },
+        error => {
+            // Error comunication with server
+            var errormess = new Error(error.message);
+            throw errormess;
+        })
+        .then(response => response.json())
+        .then(user => {
+            for(var i = 0 ; i < user.length; i ++){
+                if(user[i].password === password && user[i].username === username){
+                    return user[i];
+                }
+            }
+            var error = new Error('Error. Usuario no registrado');
+            throw error;
+        
+        })
+        .catch(error => alert(error.message));
+}

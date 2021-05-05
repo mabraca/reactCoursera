@@ -8,7 +8,7 @@ import ContactComponent from './ContactComponent'
 import About from './AboutComponent'
 import { Switch, Route,Redirect, withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchDishes, fetchPromos, fetchComments, postComment, fetchLeaders, postFeedback } from '../redux/AcrtionCreators';
+import { fetchDishes, fetchPromos, fetchComments, postComment, fetchLeaders, postFeedback, fetchLogin } from '../redux/AcrtionCreators';
 import { actions } from 'react-redux-form';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
@@ -31,6 +31,7 @@ const mapDispatchToProps = dispatch => ({
   fetchPromos: () => { dispatch(fetchPromos())},
   fetchLeaders: () => { dispatch(fetchLeaders())},
   postFeedback: (feedback) => dispatch(postFeedback(feedback)),
+  fetchLogin: (user,password) => dispatch(fetchLogin(user,password))
 
 });
 
@@ -70,7 +71,7 @@ render() {
   };
     return (
       <div>
-        <Header />
+        <Header fetchLogin={this.props.fetchLogin} />
         <TransitionGroup>
           <CSSTransition key={this.props.location.key} classNames="page" timeout={300}>
             <Switch location={this.props.location}>
